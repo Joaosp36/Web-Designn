@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber City - Loja Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyber-primary: #00f5ff;
+            --cyber-secondary: #ff00ff;
+            --cyber-accent: #00ff88;
+            --cyber-gold: #ffd700;
+            --cyber-bg: #0a0a0a;
+            --cyber-card: rgba(20, 20, 30, 0.95);
+            --cyber-glow: 0 0 20px rgba(0, 245, 255, 0.4);
+        }
+
+        * { font-family: 'Roboto Mono', monospace; }
+
+        body {
+            background: var(--cyber-bg);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        
+        .text-cyan { color: var(--cyber-primary); }
+
+        
+        .cyber-card {
+            background: var(--cyber-card);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        
+        .hero-cyber {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(0,245,255,0.05) 0%, transparent 70%);
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        
+        .btn-city-cyber {
+            background: transparent;
+            border: 2px solid var(--cyber-primary);
+            color: var(--cyber-primary);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 12px 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-city-cyber:hover {
+            color: #000;
+            background: var(--cyber-primary);
+            box-shadow: 0 0 20px var(--cyber-primary);
+        }
+
+        .cart-btn-hero {
+            background: linear-gradient(145deg, var(--cyber-primary), var(--cyber-secondary));
+            border: none;
+            border-radius: 5px;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .cart-btn-hero:hover {
+            transform: scale(1.05);
+            color: #000;
+        }
+
+        
+        .products-cyber { padding: 5rem 0; }
+
+        .product-card-cyber {
+            background: var(--cyber-card);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card-cyber:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+            border-color: var(--cyber-primary);
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--cyber-primary), var(--cyber-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .product-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--cyber-accent);
+            margin: 1rem 0;
+        }
+
+        
+        .cart-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-badge {
+            background: var(--cyber-secondary);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--cyber-secondary);
+        }
+
+        .checkout-card {
+            background: var(--cyber-card);
+            border: 2px solid var(--cyber-primary);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-cyber { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart-counter">
+        <div class="cart-badge" id="cartCount">0</div>
+    </div>
+
+    <section class="hero-cyber">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title animate__animated animate__fadeInLeft">Cyber City</h1>
+                    <p class="lead mb-4">A tecnologia do amanhã, disponível hoje para os cidadãos da rede.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#carrinho" class="btn cart-btn-hero">
+                            <i class="fas fa-shopping-cart me-2"></i>CARRINHO
+                        </a>
+                        <a href="#produtos" class="btn btn-outline-light btn-lg">
+                            VER PRODUTOS
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center d-none d-lg-block">
+                    <div class="cyber-card p-5 animate__animated animate__pulse animate__infinite">
+                        <i class="fas fa-microchip fa-5x text-cyan mb-4"></i>
+                        <h3 class="text-cyan">SISTEMA ONLINE</h3>
+                        <p class="text-muted">Conexão neural estabelecida</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="produtos" class="products-cyber">
+        <div class="container">
+            <h2 class="text-center mb-5 font-orbitron" style="color: var(--cyber-primary)">SOFTWARE & HARDWARE</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="product-card-cyber">
+                        <div class="product-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>CyberCore X1</h3>
+                        <div class="product-price">R$ 999,99</div>
+                        <button class="btn btn-city-cyber w-100" onclick="addToCart('CyberCore X1', 2999)">Adicionar</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card-cyber">
+                        <div class="product-icon"><i class="fas fa-headset"></i></div>
+                        <h3>Neon VR Pro</h3>
+                        <div class="product-price">R$ 999,99</div>
+                        <button class="btn btn-city-cyber w-100" onclick="addToCart('Neon VR Pro', 1899)">Adicionar</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card-cyber">
+                        <div class="product-icon"><i class="fas fa-keyboard"></i></div>
+                        <h3>Quantum KB</h3>
+                        <div class="product-price">R$ 999,99</div>
+                        <button class="btn btn-city-cyber w-100" onclick="addToCart('Quantum KB', 899)">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="carrinho" class="py-5 bg-black">
+        <div class="container">
+            <div class="checkout-card mx-auto" style="max-width: 800px;">
+                <h2 class="text-center mb-4"><i class="fas fa-shopping-cart me-3"></i>CHECKOUT</h2>
+                <div id="cartItems" class="mb-4">
+                    <p class="text-center text-muted">Seu carrinho está vazio.</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 id="cartTotal">Total: R$ 0,00</h3>
+                    <button class="btn btn-city-cyber" onclick="checkout()">Finalizar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCart();
+            
+            
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "ADICIONADO!";
+            btn.style.borderColor = "var(--cyber-accent)";
+            btn.style.color = "var(--cyber-accent)";
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.borderColor = ""; 
+                btn.style.color = "";
+            }, 1000);
+        }
+
+        function updateCart() {
+            const countElement = document.getElementById('cartCount');
+            const itemsElement = document.getElementById('cartItems');
+            const totalElement = document.getElementById('cartTotal');
+            
+            countElement.textContent = cart.length;
+            
+            if(cart.length === 0) {
+                itemsElement.innerHTML = '<p class="text-center text-muted">Seu carrinho está vazio.</p>';
+                totalElement.textContent = 'Total: R$ 0,00';
+                return;
+            }
+
+            itemsElement.innerHTML = cart.map((item, index) => `
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary py-2">
+                    <span>${item.name}</span>
+                    <div>
+                        <span class="me-3">R$ ${item.price.toFixed(2)}</span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${index})">&times;</button>
+                    </div>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((acc, item) => acc + item.price, 0);
+            totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function checkout() {
+            if(cart.length === 0) {
+                alert("O carrinho está vazio!");
+                return;
+            }
+            alert("Compra realizada com sucesso!");
+            cart = [];
+            updateCart();
+        }
+
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

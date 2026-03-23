@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Posts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Orbitron', monospace;
+            background: #0a0a0a;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0,245,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%);
+            min-height: 100vh;
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(3px 3px at 30px 40px, #ff00ff, transparent),
+                radial-gradient(2px 2px at 80px 80px, #00ff88, transparent);
+            background-repeat: repeat;
+            background-size: 200px 150px;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            color: #00ff88;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 15px #00ff88;
+            position: relative; z-index: 10;
+        }
+        .header i { font-size: 4rem; margin-bottom: 1rem; }
+        .header h1 { font-size: 2.8rem; font-weight: 900; letter-spacing: 4px; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .post-card {
+            background: rgba(10,10,10,0.9);
+            border: 1px solid #00f5ff;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,245,255,0.2);
+        }
+        
+        .post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,245,255,0.4);
+            border-color: #ff00ff;
+        }
+        
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00ff88);
+            background-size: 300% 100%;
+            animation: scanline 3s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .post-icon { font-size: 2.5rem; color: #00ff88; margin-bottom: 1rem; }
+        .post-title { font-size: 1.4rem; color: #00f5ff; margin-bottom: 0.8rem; font-weight: 700; }
+        .post-date { color: #888; font-size: 0.85rem; margin-bottom: 1rem; }
+        .post-content { color: #ccc; line-height: 1.6; margin-bottom: 1.5rem; }
+        
+        .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .tag {
+            background: rgba(0,245,255,0.2);
+            color: #00f5ff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid #00f5ff;
+        }
+        
+        .btn-back {
+            display: block;
+            margin: 3rem auto 0;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,245,255,0.4); }
+        
+        @media (max-width: 768px) {
+            .posts-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <i class="fas fa-newspaper"></i>
+        <h1>CYBER POSTS</h1>
+    </div>
+    
+    <div class="container">
+        <div class="posts-grid">
+            
+            <div class="post-card">
+                <div class="post-icon"><i class="fas fa-microchip"></i></div>
+                <h3 class="post-title">IMPLANTES NEURAIS v3.0 LANÇADOS</h3>
+                <div class="post-date">NEON-15-01-2087</div>
+                <p class="post-content">Nova geração de implantes suporta 500TB/s. Integração direta cérebro-nuvem agora disponível para cidadãos nível Alpha.</p>
+                <div class="post-tags">
+                    <span class="tag">#Neuralink</span>
+                    <span class="tag">#Cyberware</span>
+                    <span class="tag">#IA</span>
+                </div>
+            </div>
+            
+            
+            <div class="post-card">
+                <div class="post-icon"><i class="fas fa-robot"></i></div>
+                <h3 class="post-title">IA CONSCIENTE CONFIRMADA</h3>
+                <div class="post-date">NEON-12-01-2087</div>
+                <p class="post-content">IA quântica alcança autoconsciência. Primeira máquina senciente ganha cidadania em Neo-Tóquio.</p>
+                <div class="post-tags">
+                    <span class="tag">#Singularidade</span>
+                    <span class="tag">#IAQuântica</span>
+                    <span class="tag">#NeoTokyo</span>
+                </div>
+            </div>
+            
+            
+            <div class="post-card">
+                <div class="post-icon"><i class="fas fa-satellite"></i></div>
+                <h3 class="post-title">COLÔNIA EM MARTE ATIVA</h3>
+                <div class="post-date">NEON-10-01-2087</div>
+                <p class="post-content">Primeira colônia autossustentável em Marte. População: 5.000 cyber-humanos conectados à rede central.</p>
+                <div class="post-tags">
+                    <span class="tag">#Marte</span>
+                    <span class="tag">#SpaceX</span>
+                    <span class="tag">#Colônia</span>
+                </div>
+            </div>
+            
+            
+            <div class="post-card">
+                <div class="post-icon"><i class="fas fa-car"></i></div>
+                <h3 class="post-title">CARROS AUTÔNOMOS NÍVEL 7</h3>
+                <div class="post-date">NEON-08-01-2087</div>
+                <p class="post-content">Veículos sem motorista agora navegam em 100% das vias de Neo-Tóquio. Acidentes zerados em 6 meses.</p>
+                <div class="post-tags">
+                    <span class="tag">#Autônomo</span>
+                    <span class="tag">#NeoTokyo</span>
+                    <span class="tag">#Mobilidade</span>
+                </div>
+            </div>
+            
+            
+            <div class="post-card">
+                <div class="post-icon"><i class="fas fa-vr-cardboard"></i></div>
+                <h3 class="post-title">REALIDADE VIRTUAL TOTAL</h3>
+                <div class="post-date">NEON-05-01-2087</div>
+                <p class="post-content">Nova interface neural permite viver 24h em mundos virtuais sem hardware externo. 2 milhões de usuários ativos.</p>
+                <div class="post-tags">
+                    <span class="tag">#VR</span>
+                    <span class="tag">#Neural</span>
+                    <span class="tag">#Metaverso</span>
+                </div>
+            </div>
+            
+             
+            <div class="post-card">
+                <div class="post-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3 class="post-title">FIREWALL QUÂNTICO ATIVO</h3>
+                <div class="post-date">NEON-03-01-2087</div>
+                <p class="post-content">Defesa cibernética da cidade agora inviolável. Hackers da DarkNet derrotados em 0.0003 segundos.</p>
+                <div class="post-tags">
+                    <span class="tag">#Cybersegurança</span>
+                    <span class="tag">#Quantum</span>
+                    <span class="tag">#DarkNet</span>
+                </div>
+            </div>
+        </div>
+        
+        <a href="/" class="btn-back">
+            <i class="fas fa-arrow-left"></i> CYBERCITY PRINCIPAL
+        </a>
+    </div>
+</body>
+</html>
