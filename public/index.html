@@ -5,378 +5,430 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber City</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Orbitron', monospace;
-            /* FUNDO CIBERNÉTICO */
             background: 
-                
                 linear-gradient(135deg, #0a0a15 0%, #151525 30%, #202035 60%, #2a2a45 100%),
-                
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 25px,
-                    rgba(0,200,255,0.04) 25px,
-                    rgba(0,200,255,0.04) 27px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 25px,
-                    rgba(200,0,255,0.04) 25px,
-                    rgba(200,0,255,0.04) 27px
-                ),
-                
+                repeating-linear-gradient(90deg, transparent, transparent 25px, rgba(0,200,255,0.04) 25px, rgba(0,200,255,0.04) 27px),
+                repeating-linear-gradient(0deg, transparent, transparent 25px, rgba(200,0,255,0.04) 25px, rgba(200,0,255,0.04) 27px),
                 radial-gradient(circle at 15% 25%, rgba(0,200,255,0.06) 0%, transparent 40%),
                 radial-gradient(circle at 75% 75%, rgba(200,0,255,0.06) 0%, transparent 40%),
                 radial-gradient(circle at 40% 80%, rgba(0,255,150,0.05) 0%, transparent 40%);
             background-size: 200% 200%, 50px 50px, 50px 50px, 300% 300%, 300% 300%, 300% 300%;
-            
-            animation: 
-                cyberFlow 25s ease-in-out infinite,
-                codeMatrix 35s linear infinite,
-                cyberGlow 8s ease-in-out infinite alternate;
+            animation: cyberFlow 25s ease-in-out infinite, codeMatrix 35s linear infinite;
             color: #00c8ff;
             min-height: 100vh;
-            position: relative;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            overflow-x: hidden;
         }
-        
-        
-        .cyber-particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .cyber-particle {
-            position: absolute;
-            width: 2px; height: 2px;
-            background: radial-gradient(circle, rgba(0,200,255,0.9), transparent);
-            border-radius: 50%;
-            animation: cyberFloat 30s infinite linear;
-            box-shadow: 0 0 6px rgba(0,200,255,0.7);
-        }
-        
-        
-        @keyframes cyberFlow {
-            0%, 100% { background-position: 0% 50%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-            33% { background-position: 100% 50%, 50px 50px, 50px 50px, 100% 100%, 100% 0%, 300px 300px; }
-            66% { background-position: 0% 100%, 100px 100px, 100px 100px, 0% 0%, 0% 100%, 600px 600px; }
-        }
-        
-        @keyframes codeMatrix {
-            0% { background-position: 0% 0%, 0% 0%; }
-            100% { background-position: 100px 100px, 100px 100px; }
-        }
-        
-        @keyframes cyberGlow {
-            0% { filter: brightness(1) contrast(1); }
-            100% { filter: brightness(1.1) contrast(1.05); }
-        }
-        
-        @keyframes cyberFloat {
-            0% { 
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            8% { opacity: 0.9; }
-            92% { opacity: 0.9; }
-            100% { 
-                transform: translateY(-30px) scale(1);
-                opacity: 0;
-            }
-        }
-        
-        
+
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
             max-width: 650px;
             width: 90%;
             padding: 3rem 2rem;
             background: rgba(255,255,255,0.025);
             backdrop-filter: blur(35px);
-            border: 1px solid rgba(0,200,255,0.15);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid rgba(0,200,255,0.1);
             border-radius: 25px;
             box-shadow: 
-                0 35px 90px rgba(0,0,0,0.85),
-                0 0 120px rgba(0,200,255,0.12),
-                inset 0 1px 0 rgba(255,255,255,0.08);
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                0 25px 50px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1);
             position: relative;
             overflow: hidden;
         }
-        
+
         .container::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            right: 0; bottom: 0;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             background: 
-                linear-gradient(90deg, transparent, rgba(0,200,255,0.05), transparent),
-                linear-gradient(0deg, transparent, rgba(200,0,255,0.05), transparent);
-            animation: cyberScan 6s linear infinite;
+                radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%),
+                radial-gradient(circle at 70% 30%, rgba(200,0,255,0.05) 0%, transparent 70%);
+            animation: scanlines 20s linear infinite;
+            pointer-events: none;
         }
-        
-        @keyframes cyberScan {
-            0% { 
-                transform: translateX(-100%) translateY(-100%);
-            }
-            100% { 
-                transform: translateX(100%) translateY(100%);
-            }
-        }
-        
-        .container:hover {
-            transform: translateY(-10px);
-            box-shadow: 
-                0 50px 120px rgba(0,0,0,0.9),
-                0 0 180px rgba(0,200,255,0.25),
-                inset 0 1px 0 rgba(255,255,255,0.15);
-            border-color: rgba(0,200,255,0.35);
-        }
-        
-        .main-title {
-            margin-bottom: 2.5rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .cyber-icon {
-            font-size: 5.5rem;
-            background: linear-gradient(45deg, #00c8ff, #c800ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.2rem;
+
+        .city-icon {
+            font-size: 60px;
+            margin-bottom: 1.5rem;
             display: block;
-            filter: drop-shadow(0 0 25px rgba(0,200,255,0.6));
-            animation: iconPulse 3.5s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px currentColor);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        @keyframes iconPulse {
-            from { 
-                filter: drop-shadow(0 0 20px rgba(0,200,255,0.5)) scale(1); 
-            }
-            to { 
-                filter: drop-shadow(0 0 40px rgba(0,200,255,0.9)) scale(1.05); 
-            }
+
+        .city-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 40px #00c8ff);
         }
-        
+
         h1 { 
-            font-size: 3.2rem;
+            font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #00c8ff, #c800ff, #00ff88);
+            background: linear-gradient(45deg, #00c8ff, #c800ff, #00ff88, #ffaa00);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.8rem;
-            letter-spacing: 5px;
-            text-shadow: 0 0 30px rgba(0,200,255,0.6);
-            animation: titleShift 5s ease infinite;
-            position: relative;
-            z-index: 2;
+            animation: gradientShift 4s ease-in-out infinite;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(0,200,255,0.5);
         }
-        
-        @keyframes titleShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
+
         .subtitle {
             font-size: 1.3rem;
             color: #00ff88;
-            margin-bottom: 3rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            opacity: 0.95;
+            margin-bottom: 1rem;
             text-shadow: 0 0 15px rgba(0,255,136,0.5);
+            font-weight: 700;
+        }
+
+       
+        .credits {
+            font-family: 'VT323', monospace;
+            font-size: 1.4rem;
+            background: linear-gradient(90deg, 
+                #00ff41 0%, 
+                #00c8ff 25%, 
+                #ff00ff 50%, 
+                #ffaa00 75%, 
+                #00ff41 100%
+            );
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            animation: 
+                hackerGlitch 2s ease-in-out infinite,
+                hackerScan 3s linear infinite;
+            text-shadow: 
+                0 0 10px rgba(0,255,65,0.8),
+                2px 0 0 rgba(0,200,255,0.3),
+                -2px 0 0 rgba(255,0,255,0.3);
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             position: relative;
-            z-index: 2;
         }
-        
-        
-        .tabs-container {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(0,200,255,0.2);
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 
-                0 25px 70px rgba(0,0,0,0.75),
-                0 0 100px rgba(0,200,255,0.12);
-            transition: all 0.5s ease;
-            max-width: 500px;
-            width: 100%;
-            position: relative;
-            z-index: 2;
+
+        .credits::before {
+            content: '>> ';
+            color: #00ff41;
+            animation: blink 0.8s infinite;
+            margin-right: 5px;
         }
-        
-        .tabs-container:hover {
-            transform: translateY(-6px);
-            box-shadow: 
-                0 35px 90px rgba(0,0,0,0.85),
-                0 0 150px rgba(0,200,255,0.25);
-            border-color: rgba(0,200,255,0.4);
+
+        .credits::after {
+            content: ' <<';
+            color: #ff00ff;
+            animation: blink 0.8s infinite reverse;
+            margin-left: 5px;
         }
-        
+
         .tab {
             display: block;
             background: rgba(255,255,255,0.05);
             color: #00c8ff;
-            padding: 18px 30px;
-            border: 2px solid rgba(0,200,255,0.3);
-            border-radius: 12px;
-            font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
+            padding: 18px 25px;
+            border-radius: 15px;
+            margin: 15px 0;
             text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0,200,255,0.2);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
-        
-        .tab:last-child { margin-bottom: 0; }
-        
+
         .tab::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0,200,255,0.3), 
+                rgba(200,0,255,0.2),
+                transparent
+            );
+            transition: left 0.6s;
         }
-        
-        .tab:hover::before { left: 100%; }
-        
+
+        .tab:hover::before {
+            left: 100%;
+        }
+
         .tab:hover {
-            background: rgba(0,200,255,0.15);
-            border-color: rgba(0,200,255,0.6);
-            transform: translateY(-3px) scale(1.01);
+            transform: translateY(-5px);
             box-shadow: 
-                0 20px 45px rgba(0,200,255,0.25),
-                0 0 70px rgba(0,200,255,0.35);
+                0 20px 40px rgba(0,200,255,0.3),
+                0 0 30px rgba(0,200,255,0.2);
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(0,200,255,0.5);
             color: #ffffff;
         }
-        
-        
+
+        .tab:active {
+            transform: translateY(-2px);
+        }
+
         .status {
-            padding: 2rem 2.5rem;
-            background: rgba(0,255,136,0.08);
-            backdrop-filter: blur(25px);
-            border: 2px solid rgba(0,255,136,0.35);
-            border-radius: 15px;
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            box-shadow: 
-                0 25px 60px rgba(0,0,0,0.65),
-                0 0 80px rgba(0,255,136,0.25);
-            transition: all 0.4s ease;
-            max-width: 500px;
-            width: 100%;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .status:hover {
-            transform: scale(1.03);
-            box-shadow: 
-                0 30px 70px rgba(0,0,0,0.75),
-                0 0 100px rgba(0,255,136,0.4);
-            border-color: rgba(0,255,136,0.6);
-        }
-        
-        .status i {
+            margin-top: 2.5rem;
             color: #00ff88;
-            margin-right: 0.8rem;
-            font-size: 1.3rem;
-            animation: cyberPulse 3s infinite;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-right: 3px solid #00c8ff;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: 
+                blink 1s infinite, 
+                type 3s steps(25) 1s forwards,
+                glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 20px rgba(0,255,136,0.8);
         }
+
         
-        @keyframes cyberPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.2) rotate(180deg); }
+        @keyframes cyberFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
+
+        @keyframes codeMatrix {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100px 100px; }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #00c8ff; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        @keyframes type {
+            from { width: 0; }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0,255,136,0.8); }
+            to { text-shadow: 0 0 30px rgba(0,255,136,1), 0 0 40px rgba(0,255,136,0.5); }
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+        }
+
+        
+        @keyframes hackerGlitch {
+            0%, 100% { 
+                transform: translate(0);
+                filter: hue-rotate(0deg);
+            }
+            10% { 
+                transform: translate(-2px, 2px);
+                filter: hue-rotate(90deg);
+            }
+            20% { 
+                transform: translate(2px, -1px);
+                filter: hue-rotate(180deg);
+            }
+            30% { 
+                transform: translate(-1px, -2px);
+                filter: hue-rotate(270deg);
+            }
+            40%, 60%, 80%, 100% { 
+                transform: translate(0);
+            }
+        }
+
+        @keyframes hackerScan {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
         
         @media (max-width: 768px) {
-            body { padding: 0.5rem; }
-            .container { 
-                max-width: 95%; 
-                padding: 2.5rem 1.5rem; 
+            h1 { font-size: 2.5rem; }
+            .city-icon { font-size: 50px; }
+            .container { padding: 2.5rem 1.5rem; width: 95%; }
+            .tab { padding: 16px 20px; font-size: 0.95rem; }
+            .credits { font-size: 1.2rem; letter-spacing: 2px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .city-icon { font-size: 40px; }
+            .container { padding: 2rem 1rem; }
+            .subtitle { font-size: 1.1rem; }
+            .credits { font-size: 1.1rem; letter-spacing: 1px; }
+        }
+
+        
+        .loading {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            h1 { font-size: 2.4rem; letter-spacing: 2px; }
-            .cyber-icon { font-size: 4rem; }
-            .tabs-container { padding: 1.8rem 1.2rem; }
-            .tab { padding: 16px 22px; font-size: 1rem; }
+        }
+
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(0,200,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
-<body>
+<body class="loading">
     
-    <div class="cyber-particles" id="particles"></div>
-    
+    <div class="particles" id="particles"></div>
+
     <div class="container">
-        <div class="main-title">
-            <i class="fas fa-city cyber-icon"></i>
-            <h1>CYBER CITY</h1>
-            <p class="subtitle">SISTEMA CENTRAL</p>
-        </div>
+        <i class="fas fa-city city-icon"></i>
+        <h1>CYBER CITY</h1>
+        <p class="subtitle">SISTEMA CENTRAL</p>
         
-        <div class="tabs-container">
-            <a href="/posts" class="tab">
-                <i class="fas fa-newspaper"></i>
-                Posts
-            </a>
-            <a href="/admin" class="tab">
-                <i class="fas fa-shopping-cart"></i>
-                Carrinho
-            </a>
-        </div>
-        
-        <div class="status">
-            <i class="fas fa-circle"></i>
-            CIDADE CIBERNÉTICA ONLINE
-        </div>
+        <
+        <p class="credits">
+            JOAO_VITOR_SIMAO & LEON_DE_OLIVEIRA
+        </p>
+
+        <a href="/posts" class="tab">
+            <i class="fas fa-comments"></i> Posts
+        </a>
+        <a href="/admin" class="tab">
+            <i class="fas fa-cogs"></i> Control Center
+        </a>
+
+        <div class="status">CIDADE CIBERNÉTICA ONLINE</div>
     </div>
 
     <script>
-        function createCyberParticles() {
-            const container = document.getElementById('particles');
-            for(let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'cyber-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = `-${Math.random() * 25}s`;
-                particle.style.animationDuration = (Math.random() * 20 + 25) + 's';
-                container.appendChild(particle);
-            }
+        // Terminal typing effect completion
+        setTimeout(() => {
+            document.querySelector('.status').style.borderRightColor = 'transparent';
+        }, 4000);
+
+        // Floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 6 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 45000);
         }
-        createCyberParticles();
+
+        // Create particles continuously
+        setInterval(createParticle, 300);
+        for(let i = 0; i < 5; i++) createParticle();
+
+        // Smooth scroll prevention
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+
+        // Enhanced hover sounds (Web Audio API)
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playHoverSound(frequency = 800) {
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = 'sawtooth';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch(e) {}
+        }
+
+        
+        document.querySelectorAll('.tab, .city-icon').forEach(el => {
+            el.addEventListener('mouseenter', () => playHoverSound(800 + Math.random() * 400));
+            el.addEventListener('click', () => playHoverSound(1200));
+        });
+
+        
+        const credits = document.querySelector('.credits');
+        credits.addEventListener('mouseenter', () => {
+            credits.style.animation = 'hackerGlitch 0.1s infinite';
+            playHoverSound(400);
+        });
+        credits.addEventListener('mouseleave', () => {
+            credits.style.animation = 'hackerGlitch 2s ease-in-out infinite, hackerScan 3s linear infinite';
+        });
     </script>
 </body>
 </html>
